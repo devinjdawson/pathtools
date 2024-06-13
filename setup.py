@@ -22,12 +22,14 @@
 # THE SOFTWARE.
 
 import os
-import imp
+from importlib.machinery import SourceFileLoader
+
+# mymodule = SourceFileLoader('modname', '/path/to/file.py').load_module()
 from distutils.core import setup
 
 PKG_DIR = 'pathtools'
-version = imp.load_source('version',
-                          os.path.join(PKG_DIR, 'version.py'))
+version = SourceFileLoader('version',
+                          os.path.join(PKG_DIR, 'version.py')).load_module()
 
 def read_file(filename):
     """
